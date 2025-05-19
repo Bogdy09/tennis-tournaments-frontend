@@ -6,7 +6,7 @@ function LoginForm() {
     const [password, setPassword] = useState('password123'); // Default password for simplicity
 
     const handleLogin = () => {
-        axios.post('http://localhost:3000/api/auth/login', { username, password })
+        axios.post('https://tennis-backend-ioen.onrender.com/api/auth/login', { username, password })
             .then(res => {
                 localStorage.setItem('userId', res.data.userId);
                 localStorage.setItem("username", res.data.username);
