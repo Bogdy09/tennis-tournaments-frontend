@@ -43,7 +43,7 @@ export const TournamentProvider = ({ children }) => {
         fetchTournaments();
 
         //  WebSocket setup
-        const socket = io("http://localhost:5000");
+        const socket = io("https://tennis-backend-ioen.onrender.com/api/tournaments");
 
         socket.on("connect", () => {
             console.log(" Connected to WebSocket server");
