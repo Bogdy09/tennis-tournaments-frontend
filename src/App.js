@@ -34,7 +34,7 @@ export default function App() {
     useEffect(() => {
         const pingServer = async () => {
             try {
-                const res = await fetch("/api/tournaments");
+                const res = await fetch("https://tennis-backend-ioen.onrender.com/api/tournaments");
                 setServerAvailable(res.ok);
             } catch (err) {
                 setServerAvailable(false);
