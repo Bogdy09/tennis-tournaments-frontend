@@ -27,7 +27,7 @@ export function queueOperation(op) {
 }
 
 
-const API_URL = "http://localhost:5000/api/tournaments";
+const API_URL = "https://tennis-backend-ioen.onrender.com";
 
 export async function syncQueue(isOnline, serverAvailable) {
     if (!isOnline || !serverAvailable) return;
