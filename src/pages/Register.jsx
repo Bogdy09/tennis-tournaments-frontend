@@ -12,7 +12,7 @@ export default function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3000/api/auth/register", formData);
+            const response = await axios.post("https://tennis-backend-ioen.onrender.com/api/auth/register", formData);
             setMessage(response.data.message);
         } catch (error) {
             if (error.response) {
