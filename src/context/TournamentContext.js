@@ -11,7 +11,7 @@ export const TournamentProvider = ({ children }) => {
     const [latestTournament, setLatestTournament] = useState(null);
 
 
-    const API_URL = "http://localhost:5000/api/tournaments";
+    const API_URL = "https://tennis-backend-ioen.onrender.com/api/tournaments";
 
     useEffect(() => {
         const fetchTournaments = async () => {
