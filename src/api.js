@@ -47,11 +47,7 @@ export const getTournaments = async () => {
 };
 
 export const getTournamentById = async (id, isOnline, serverAvailable) => {
-    if (!isOnline || !serverAvailable) {
-        const local = localStorage.getItem('offline_local_tournaments');
-        const list = local ? JSON.parse(local) : [];
-        return list.find(t => t.id === Number(id)) || null;
-    }
+   
     const response = await axios.get(`${API_URL}/api/tournaments/${id}`);
     return response.data;
 };
@@ -59,20 +55,7 @@ export const getTournamentById = async (id, isOnline, serverAvailable) => {
 export const createTournament = async (tournament, isOnline, serverAvailable) => {
     const userId = localStorage.getItem('userId');
     
-    if (!isOnline || !serverAvailable) {
-        queueOperation({ 
-            type: 'POST', 
-            data: { ...tournament, userId },
-            url: `${API_URL}/api/tournaments`
-        });
-
-        const local = JSON.parse(localStorage.getItem('offline_local_tournaments') || '[]');
-        local.push({ ...tournament, id: Date.now() });
-        localStorage.setItem('offline_local_tournaments', JSON.stringify(local));
-
-        return { queued: true };
-    }
-
+    
     const res = await fetch(`${API_URL}/api/tournaments`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -86,17 +69,7 @@ export const createTournament = async (tournament, isOnline, serverAvailable) =>
 export const updateTournament = async (id, updates, isOnline, serverAvailable) => {
     const userId = localStorage.getItem('userId');
     
-    if (!isOnline || !serverAvailable) {
-        queueOperation({ 
-            type: 'PATCH', 
-            id, 
-            data: updates, 
-            userId,
-            url: `${API_URL}/api/tournaments/${id}`
-        });
-        return { queued: true };
-    }
-
+   
     try {
         const response = await axios.patch(
             `${API_URL}/api/tournaments/${id}`, 
@@ -113,16 +86,7 @@ export const updateTournament = async (id, updates, isOnline, serverAvailable) =
 export const deleteTournament = async (id, isOnline, serverAvailable) => {
     const userId = localStorage.getItem('userId');
     
-    if (!isOnline || !serverAvailable) {
-        queueOperation({ 
-            type: 'DELETE', 
-            id,
-            url: `${API_URL}/api/tournaments/${id}`,
-            data: { userId }
-        });
-        return { queued: true };
-    }
-
+   
     try {
         await axios.delete(`${API_URL}/api/tournaments/${id}`, {
             data: { userId }
