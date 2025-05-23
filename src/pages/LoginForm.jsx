@@ -32,6 +32,8 @@ function LoginForm() {
                 console.error(err);
             });
     };
+    console.log("Current step:", step);
+
    return (
         <div>
             {step === 1 ? (
