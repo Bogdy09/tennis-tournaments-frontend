@@ -10,12 +10,8 @@ function LoginForm() {
     const handleLogin = () => {
         axios.post('https://tennis-backend-ioen.onrender.com/api/auth/login', { username, password })
             .then(res => {
-                alert("Verification code sent to your email");
-                setStep(2);
-               // localStorage.setItem('userId', res.data.userId);
-                //localStorage.setItem("username", res.data.username);
-
-                alert("Login success!");
+               alert("Verification code sent to your email");
+               setStep(2);
             })
             .catch(err => {
                 alert("Login failed");
